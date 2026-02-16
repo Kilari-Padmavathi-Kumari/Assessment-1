@@ -5,9 +5,9 @@ from datetime import datetime
 
 app = FastAPI()
 
-# -------------------------
+
 # Database Connection
-# -------------------------
+
 def connect():
     return psycopg2.connect(
         host="localhost",
@@ -16,9 +16,8 @@ def connect():
         password="localhost"
     )
 
-# -------------------------
 # Models
-# -------------------------
+
 class Student(BaseModel):
     name: str
     email: str
@@ -34,9 +33,8 @@ class Enrollment(BaseModel):
     course_id: int
 
 
-# -------------------------
-# 1️⃣ Create Student
-# -------------------------
+
+# Create Student
 @app.post("/students")
 def create_student(student: Student):
 
@@ -63,9 +61,9 @@ def create_student(student: Student):
     return {"id": new_id, "name": student.name, "email": student.email}
 
 
-# -------------------------
-# 2️⃣ Create Course
-# -------------------------
+
+# Create Course
+
 @app.post("/courses")
 def create_course(course: Course):
 
@@ -87,9 +85,9 @@ def create_course(course: Course):
     return {"id": new_id, "title": course.title}
 
 
-# -------------------------
-# 3️⃣ Enroll Student
-# -------------------------
+
+#  Enroll Student
+
 @app.post("/enrollments")
 def enroll_student(data: Enrollment):
 
@@ -123,9 +121,9 @@ def enroll_student(data: Enrollment):
     return {"message": "Enrolled successfully"}
 
 
-# -------------------------
-# 4️⃣ Get Student with Courses
-# -------------------------
+
+#  Get Student with Courses
+
 @app.get("/students/{student_id}")
 def get_student(student_id: int):
 
